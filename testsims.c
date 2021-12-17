@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
 	int i;
 	int id;
 	char perror_buf[50];
-	//char logbuffer[200];
+	char logbuf[200];
 	char buf2[20];
 
 	int repeats = atoi(argv[1]); // num times to repeat loop
@@ -34,6 +34,11 @@ int main(int argc, char* argv[]){
 
 		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
 		sleep(seconds);
+
+		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
+		put_timestamp(logbuf, sizeof(logbuf), buf2);
+
+    logmsg(logbuf);
 
 	}
 
