@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 	int id;
 	char perror_buf[50];
 	char logbuf[200];
-	char buf2[20];
+	char buf2[200];
 
 	int repeats = atoi(argv[1]); // num times to repeat loop
 	int seconds = atoi(argv[2]); // num seconds to wait/sleep
@@ -36,20 +36,17 @@ int main(int argc, char* argv[]){
 
 	printf("****testsim[%d]: Started with %d %d\n", id, repeats, seconds);
 
-	snprintf(logbuf, sizeof(logbuf),
-					 "Time\t\tPID\tCurrent Iteration\tTotal Iterations");
-	logmsg(logbuf);
 	printf("*****testsim after log statement\n");
 	for (i = 0; i < repeats; i++) {
 		printf("*****testsim inside for\n");
-		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
+		//snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
 
+		printf("=== repeats = %i", repeats);
+		snprintf(buf2, sizeof(buf2), " iteration: %i  total iterations: %i\n", i, repeats);
+		put_timestamp(logbuf, sizeof(logbuf), buf2);
 
-		snprintf(buf2, sizeof(buf2), "%i\t%i\t%i", id, i, repeats);
-		//put_timestamp(logbuf, sizeof(logbuf), buf2);
-
-    logmsg(buf2);
-		sleep(seconds);
+    logmsg(logbuf);
+		//sleep(seconds);
 
 	}
 	printf("*******testsim after for\n");

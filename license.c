@@ -335,7 +335,7 @@ void put_timestamp(char * buf, const int buf_size, const char * msg) {
     struct tm * tm = localtime(&t);
 
 	strftime(stamp, sizeof(stamp), "%Y-%M-%d %H:%m:%S", tm);
-	snprintf(buf, buf_size, "%s %u %s\n", stamp, id, msg);
+	snprintf(buf, buf_size, "%s PID: %u %s\n", stamp, id, msg);
 	printf("***_*** end of time stamp\n");
 }
 
