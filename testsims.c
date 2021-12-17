@@ -34,14 +34,14 @@ int main(int argc, char* argv[]){
 	// create the string from the program name
 	snprintf(perror_buf, sizeof(perror_buf), "%s: Error: ", "testsim");
 
-	printf("testsim[%d]: Started with %d %d\n", id, repeats, seconds);
+	printf("****testsim[%d]: Started with %d %d\n", id, repeats, seconds);
 
 	snprintf(logbuf, sizeof(logbuf),
 					 "Time\t\tPID\tCurrent Iteration\tTotal Iterations");
 	logmsg(logbuf);
-
+	printf("*****testsim after log statement\n");
 	for (i = 0; i < repeats; i++) {
-
+		printf("*****testsim inside for\n");
 		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
 
 
@@ -52,6 +52,6 @@ int main(int argc, char* argv[]){
 		sleep(seconds);
 
 	}
-
+	printf("*******testsim after for\n");
 	return 0;
 }
