@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
 	int i;
 	int id;
 	char perror_buf[50];
-	char logbuffer[200];
+	//char logbuffer[200];
 	char buf2[20];
 
 	int repeats = atoi(argv[1]); // num times to repeat loop
@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
 	printf("testsim[%d]: Started with %d %d\n", id, repeats, seconds);
 
 	for (i = 0; i < repeats; i++) {
-		
+
 		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
 		sleep(seconds);
 
