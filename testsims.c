@@ -30,6 +30,10 @@ int main(int argc, char* argv[]){
 
 	printf("testsim[%d]: Started with %d %d\n", id, repeats, seconds);
 
+	snprintf(logbuf, sizeof(logbuf),
+					 "Time\t\tPID\tCurrent Iteration\tTotal Iterations");
+	logmsg(logbuf);
+
 	for (i = 0; i < repeats; i++) {
 
 		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);

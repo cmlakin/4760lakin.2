@@ -121,6 +121,7 @@ void checkExitTime(time_t seconds, int n) {
     //bail();
 		// destroy shared memory
 		deinit_shared_data(n);
+		exit(0);
   }
 }
 
