@@ -57,7 +57,7 @@ static int max_number (const int * arr, const int arr_size) {
 // Take access to the critical section
 static void bakery_alg() {
 	  int i;
-
+		printf("---- in bakery_alg\n");
 	    shdata->choosing[id] = 1; // tell others we are using the critical section
 
 		// set our number as one more than the maximum number
@@ -75,6 +75,7 @@ static void bakery_alg() {
 				min_number(shdata->number[i], shdata->number[id], i, id) ) {}
 
 		}
+		printf("---- end of bakery_alg\n");
 }
 
 // get out of the critical section
@@ -167,8 +168,8 @@ void logmsg(const char* sbuf) {
 	printf("PROCESS[%d]: LOG:  %s", id, sbuf);
 	printf("---- in logmsg\n");
 	// lock critical section, because file write has to be synchronized
-	bakery_alg();
-
+	//bakery_alg();
+	printf("**---- in logmsg after bakery_alg\n");
 
 	// open the file in write only and append mode (to write at end of file)
 	// int log_fd;
@@ -198,7 +199,7 @@ void logmsg(const char* sbuf) {
 	close(fid);
 
 	// unlock the file
-	bakery_release();
+	//bakery_release();
 	printf("---- end of logmsg\n");
 }
 

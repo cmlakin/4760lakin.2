@@ -46,9 +46,9 @@ int main(int argc, char* argv[]){
 
 
 		snprintf(buf2, sizeof(buf2), "%i\t%i\t%i", id, i, repeats);
-		put_timestamp(logbuf, sizeof(logbuf), buf2);
+		//put_timestamp(logbuf, sizeof(logbuf), buf2);
 
-    logmsg(logbuf);
+    logmsg(buf2);
 		sleep(seconds);
 
 	}
