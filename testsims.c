@@ -9,8 +9,14 @@ const char * perror_arg0 = "testsim";
 
 int main(int argc, char* argv[]){
 
-	if (argc != 2) {
+	if (argc != 4) {
 		printf("usage: testsim repeat wait\n");
+		int j;
+    printf("argc = %d\n",argc);
+    for(j=0;j<argc;j++)
+    {
+        printf("argv[%i]: %s\n", j, argv[j]);
+    }
 		return -1;
 	}
 
@@ -37,12 +43,13 @@ int main(int argc, char* argv[]){
 	for (i = 0; i < repeats; i++) {
 
 		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
-		sleep(seconds);
 
-		snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
+
+		snprintf(buf2, sizeof(buf2), "%i\t%i\t%i", id, i, repeats);
 		put_timestamp(logbuf, sizeof(logbuf), buf2);
 
     logmsg(logbuf);
+		sleep(seconds);
 
 	}
 

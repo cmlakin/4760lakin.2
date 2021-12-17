@@ -5,7 +5,7 @@ CFLAGS= -g -Wall
 
 all: runsim testsim
 
-runsim: runsims.o license.o config.h
+runsim: runsims.o license.o 
 	$(GCC) $(CFLAGS) runsims.o license.o -o runsim -lpthread
 
 runsims.o: runsims.c
@@ -14,7 +14,7 @@ runsims.o: runsims.c
 license.o: license.c
 	$(GCC) $(CFLAGS) -c license.c
 
-testsim: testsims.o config.h
+testsim: testsims.o
 	$(GCC)  $(CFLAGS) testsims.o license.o -o testsim
 
 testsims.o: testsims.c
