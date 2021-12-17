@@ -165,7 +165,7 @@ int removelicenses(int n) {
 void logmsg(const char* sbuf) {
 
 	printf("PROCESS[%d]: LOG:  %s", id, sbuf);
-
+	printf("---- in logmsg\n");
 	// lock critical section, because file write has to be synchronized
 	bakery_alg();
 
@@ -199,6 +199,7 @@ void logmsg(const char* sbuf) {
 
 	// unlock the file
 	bakery_release();
+	printf("---- end of logmsg\n");
 }
 
 // Create/attach the shared memory
@@ -327,13 +328,14 @@ int deinit_shared_data(const int n){  // n > 0 only in runsim. testsim uses 0
 
 // join a timestamp and a message to buffer
 void put_timestamp(char * buf, const int buf_size, const char * msg) {
-
+	printf("***__*** in time stamp\n");
   	char stamp[30];
     time_t t = time(NULL);
     struct tm * tm = localtime(&t);
 
 	strftime(stamp, sizeof(stamp), "%Y-%M-%d %H:%m:%S", tm);
 	snprintf(buf, buf_size, "%s %u %s\n", stamp, id, msg);
+	printf("***_*** end of time stamp\n");
 }
 
 
