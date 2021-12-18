@@ -1,0 +1,7 @@
+*.o
+oss
+user_proc
+test
+*.pdf
+oss.log
+
