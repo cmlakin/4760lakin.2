@@ -10,7 +10,7 @@ github: https://github.com/cmlakin/4760lakin.2.git
 same github directory.
 
 Resubmission:
-  I did not get it working 100% but it now times out after 5 seconds. And it is
+  I did not get it working 100% but it now times out after 3 seconds. And it is
   now writing to the logfile. So not fully functional, but better than before.
 
   
