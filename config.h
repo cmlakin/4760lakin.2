@@ -4,6 +4,7 @@
 #define PROCESSES 18
 #define ALARM_TIME 100
 #define LOG_FILENAME "license.log"
+#define EXIT_TIME 5
 
 
 // shared memory structure
@@ -25,7 +26,7 @@ extern const char * perror_arg0; // pointer to return error value
 // put a time stamp on messages
 void put_timestamp(char * buf, const int buf_size, const char * msg);
 
-// get unique id number to be used for working with bakery algorithm 
+// get unique id number to be used for working with bakery algorithm
 int assign_id();
 
 // functions for shared memory
@@ -48,11 +49,10 @@ int addtolicenses(int n);
 // decrements the number of licenses by n
 int removelicenses(int n);
 
-// write the specified message to the log file. 
+// write the specified message to the log file.
 // There is only one log file
 // This function will treat the logfile as a critical resource
 // It will open the file to append the message and close the file
 // 	after appending the message
 void logmsg(const char * msg);
-
-
+void put_timestamp(char *, const int, const char *);
