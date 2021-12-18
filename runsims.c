@@ -116,7 +116,7 @@ int main(int argc, char *argv[]){
 }
 
 void checkExitTime(time_t seconds, int n) {
-  if (tstart + 3 < time(0)) {
+  if (tstart + 4 < time(0)) {
     printf("Max of 1 seconds reached. Program exiting.\n");
     //bail();
 		// destroy shared memory

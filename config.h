@@ -4,6 +4,7 @@
 #define PROCESSES 18
 #define ALARM_TIME 100
 #define LOG_FILENAME "license.log"
+#define EXIT_TIME 5
 
 
 // shared memory structure

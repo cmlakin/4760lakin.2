@@ -57,7 +57,7 @@ static int max_number (const int * arr, const int arr_size) {
 // Take access to the critical section
 static void bakery_alg() {
 	  int i;
-		printf("---- in bakery_alg\n");
+		//printf("---- in bakery_alg\n");
 	    shdata->choosing[id] = 1; // tell others we are using the critical section
 
 		// set our number as one more than the maximum number
@@ -75,7 +75,7 @@ static void bakery_alg() {
 				min_number(shdata->number[i], shdata->number[id], i, id) ) {}
 
 		}
-		printf("---- end of bakery_alg\n");
+		//printf("---- end of bakery_alg\n");
 }
 
 // get out of the critical section
@@ -109,7 +109,7 @@ int getlicense(void) {
 	// reduce the number of licenses with one
 	int license_number = --shdata->numlicenses;
 
-	printf("PROCESS[%d]: Took license %d\n", id, license_number);
+	//printf("PROCESS[%d]: Took license %d\n", id, license_number);
 
 	bakery_release();
 
@@ -125,7 +125,7 @@ int returnlicense(void) {
 	// return one license
 	shdata->numlicenses++;
 
-	printf("PROCESS[%d]: Returned license\n", id);
+	//printf("PROCESS[%d]: Returned license\n", id);
 
 	bakery_release();
 
@@ -143,7 +143,7 @@ int addtolicense(int n) {
 	bakery_alg();
 	shdata->numlicenses += n;
 
-	printf("PROCESS[%d]: Added %d licenses\n", id, n);
+	//printf("PROCESS[%d]: Added %d licenses\n", id, n);
 
 	bakery_release();
 
@@ -157,36 +157,13 @@ int removelicenses(int n) {
 	shdata->numlicenses -= n;
 	bakery_release();
 
-	printf("PROCESS[%d]: Removed %d licenses\n", id, n);
+	//printf("PROCESS[%d]: Removed %d licenses\n", id, n);
 
 	return 0;
 }
 
 
 void logmsg(const char* sbuf) {
-
-	printf("PROCESS[%d]: LOG:  %s", id, sbuf);
-	printf("---- in logmsg\n");
-	// lock critical section, because file write has to be synchronized
-	//bakery_alg();
-	printf("**---- in logmsg after bakery_alg\n");
-
-	// open the file in write only and append mode (to write at end of file)
-	// int log_fd;
-	// log_fd = open(LOG_FILENAME, O_RDWR | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
-	//
-	// if (log_fd == -1) { //if open failed
-	//
-	// 	// show the error
-	// 	snprintf(perror_buf, sizeof(perror_buf), "%s: open: ", perror_arg0);
-	// 	perror(perror_buf);
-	//
-	// }
-	//
-	// // save the string buffer to file
-	// write(log_fd, (void*) sbuf, strlen(sbuf));
-	//
-	// close(log_fd);
 	int fid;
 	fid = open(LOG_FILENAME, O_RDWR | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
 
@@ -197,10 +174,6 @@ void logmsg(const char* sbuf) {
 
 	write(fid, (void *) sbuf, strlen(sbuf));
 	close(fid);
-
-	// unlock the file
-	//bakery_release();
-	printf("---- end of logmsg\n");
 }
 
 // Create/attach the shared memory
@@ -227,7 +200,7 @@ int init_shared_data(const int n){
 		}
 
 		close(fd);
-		printf("PROCESS[%d]: Created log %s\n", id, LOG_FILENAME);
+		//printf("PROCESS[%d]: Created log %s\n", id, LOG_FILENAME);
 
 		// create the shared memory file
 		fd = creat(shm_keyname, 0700);
@@ -242,7 +215,7 @@ int init_shared_data(const int n){
 		}
 
 		close(fd);
-		printf("PROCESS[%d]: Created license %s\n", id, shm_keyname);
+		//printf("PROCESS[%d]: Created license %s\n", id, shm_keyname);
 
 		// set flags for the shared memory creation
 		flags = IPC_CREAT | IPC_EXCL | S_IRWXU;
@@ -321,7 +294,7 @@ int deinit_shared_data(const int n){  // n > 0 only in runsim. testsim uses 0
 			return -1;
 		}
 
-		printf("PROCESS[%d]: Removed license %s\n", id, shm_keyname);
+		//printf("PROCESS[%d]: Removed license %s\n", id, shm_keyname);
 	}
 
 	return 0;
@@ -329,14 +302,13 @@ int deinit_shared_data(const int n){  // n > 0 only in runsim. testsim uses 0
 
 // join a timestamp and a message to buffer
 void put_timestamp(char * buf, const int buf_size, const char * msg) {
-	printf("***__*** in time stamp\n");
+	//printf("***__*** in time stamp\n");
   	char stamp[30];
     time_t t = time(NULL);
     struct tm * tm = localtime(&t);
 
-	strftime(stamp, sizeof(stamp), "%Y-%M-%d %H:%m:%S", tm);
-	snprintf(buf, buf_size, "%s PID: %u %s\n", stamp, id, msg);
-	printf("***_*** end of time stamp\n");
+	strftime(stamp, sizeof(stamp), "%Y-%m-%d %H:%M:%S", tm);
+	snprintf(buf, buf_size, "%s %s", stamp, msg);
 }
 
 

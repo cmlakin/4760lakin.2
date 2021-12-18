@@ -11,12 +11,6 @@ int main(int argc, char* argv[]){
 
 	if (argc != 4) {
 		printf("usage: testsim repeat wait\n");
-		int j;
-    printf("argc = %d\n",argc);
-    for(j=0;j<argc;j++)
-    {
-        printf("argv[%i]: %s\n", j, argv[j]);
-    }
 		return -1;
 	}
 
@@ -34,21 +28,21 @@ int main(int argc, char* argv[]){
 	// create the string from the program name
 	snprintf(perror_buf, sizeof(perror_buf), "%s: Error: ", "testsim");
 
-	printf("****testsim[%d]: Started with %d %d\n", id, repeats, seconds);
+	//printf("****testsim[%d]: Started with %d %d\n", id, repeats, seconds);
 
-	printf("*****testsim after log statement\n");
+	//printf("*****testsim after log statement\n");
 	for (i = 0; i < repeats; i++) {
-		printf("*****testsim inside for\n");
+		//printf("*****testsim inside for\n");
 		//snprintf(buf2, sizeof(buf2), "%i %i", i, repeats);
 
-		printf("=== repeats = %i", repeats);
-		snprintf(buf2, sizeof(buf2), " iteration: %i  total iterations: %i\n", i, repeats);
+		//printf("=== repeats = %i", repeats);
+		snprintf(buf2, sizeof(buf2), "PID: %i iteration #: %i ...of total iterations: %i\n", id, i, repeats);
 		put_timestamp(logbuf, sizeof(logbuf), buf2);
 
     logmsg(logbuf);
-		//sleep(seconds);
+		sleep(seconds);
 
 	}
-	printf("*******testsim after for\n");
+	//printf("*******testsim after for\n");
 	return 0;
 }
