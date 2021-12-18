@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
 	while (fgets(buf, MAX_CANON, stdin) != NULL) {
 		checkExitTime(seconds, n);
 		getlicense(); // get a license
-		printf("Runsim[%d]: got 1 license\n", getpid());
+		//printf("Runsim[%d]: got 1 license\n", getpid());
 
 		// get id for child process
 		const int assigned_id = assign_id();
@@ -71,9 +71,9 @@ int main(int argc, char *argv[]){
 
 			fclose(stdin); // child doesn't need stdin
 
-			printf("Child: %d started\n", id);
+			//printf("Child: %d started\n", id);
 			docommand(buf, seconds, n);
-			printf("Child: %d finished\n", id);
+			//printf("Child: %d finished\n", id);
 
 			exit(0);
 		}
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]){
 			// check for finished children
 			while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
 
-				printf("Runsim[%d]: %d child finished\n", getpid(), pid);
+				//printf("Runsim[%d]: %d child finished\n", getpid(), pid);
 				--numchildren; // reduce number of active children
 				checkExitTime(seconds, n);
 			}
@@ -93,14 +93,14 @@ int main(int argc, char *argv[]){
 
 	if (numchildren) {
 
-		printf("Runsim[%d]: waiting for %d children\n", getpid(), numchildren);
+		//printf("Runsim[%d]: waiting for %d children\n", getpid(), numchildren);
 
 	}
 
 	// wait for all children to finish
 	while((numchildren > 0) && ((pid = waitpid(-1, &status, 0)) >= 0)) {
 
-		printf("Runsim[%d]: %d child finished\n", getpid(), pid);
+		//printf("Runsim[%d]: %d child finished\n", getpid(), pid);
 		--numchildren;
 		checkExitTime(seconds, n);
 	}
@@ -116,8 +116,8 @@ int main(int argc, char *argv[]){
 }
 
 void checkExitTime(time_t seconds, int n) {
-  if (tstart + 4 < time(0)) {
-    printf("Max of 1 seconds reached. Program exiting.\n");
+  if (tstart + 3 < time(0)) {
+    printf("Max of 3 seconds reached. Program exiting.\n");
     //bail();
 		// destroy shared memory
 		deinit_shared_data(n);
@@ -131,7 +131,7 @@ void docommand (const char * stdinline, int seconds, int n) {
 	const pid_t pid = fork(); // fork a process
 	// if its the child
 	if (pid == 0) {
-		printf("Grandchild: %d started\n", getpid());
+		//printf("Grandchild: %d started\n", getpid());
 		checkExitTime(seconds, n);
 		char ** args = NULL;
 
@@ -156,10 +156,10 @@ void docommand (const char * stdinline, int seconds, int n) {
 
 		// wait for Grandchild to finish
 		waitpid(pid, &status, 0);
-		printf("Child[%d]: grandchild %d exited\n", getpid(), pid);
+		//printf("Child[%d]: grandchild %d exited\n", getpid(), pid);
 		// when finished return license
 		returnlicense();
-		printf("Child[%d]: license returned\n", getpid());
+		//printf("Child[%d]: license returned\n", getpid());
 	}
 }
 
